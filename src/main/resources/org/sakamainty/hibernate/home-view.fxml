@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.sakamainty.hibernate.HomeController">
+    <left>
+        <VBox spacing="10"  style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Button fx:id="medecinBtn" text="Medecin" onAction="#handleMedecin" prefWidth="150" prefHeight="20"/>
+            <Button fx:id="patientBtn" text="Patient" onAction="#handlePatient" prefWidth="150" prefHeight="20"/>
+            <Button fx:id="visiteBtn" text="Visite" onAction="#handleVisite" prefWidth="150" prefHeight="20"/>
+        </VBox>
+    </left>
+
+    <center>
+        <AnchorPane  fx:id="mainContent" style="-fx-background-color: #ecf0f1;"/>
+    </center>
+</BorderPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.sakamainty.hibernate.NewMedecinController"
+            prefHeight="200.0" prefWidth="400.0">
+
+    <headerText>
+        Ajouter Un Medecin
+    </headerText>
+
+    <content>
+        <VBox spacing="10">
+            <VBox spacing="4">
+                <Label text="Nom" />
+                <TextField />
+            </VBox>
+            <VBox spacing="4">
+                <Label text="Prenom" />
+                <TextField />
+            </VBox>
+            <VBox spacing="4">
+                <Label text="Grade"/>
+                <ChoiceBox fx:id="gradeChoiceBox" prefWidth="200">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+            </VBox>
+        </VBox>
+    </content>
+</DialogPane>
