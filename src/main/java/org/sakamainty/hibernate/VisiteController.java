@@ -25,11 +25,7 @@ public class VisiteController {
     @FXML private Button newVisiteBtn;
     @FXML private VBox visiteContent;
 
-    private ObservableList<Visite> visiteList = FXCollections.observableArrayList(
-            new Visite(new Patient("Charlot", "Vincent", "Homme", "Vohipeno"),new Medecin("Charlot", "Vincent", "Cardiologue"), LocalDate.now()),
-            new Visite(new Patient("Mamiratra", "Vincentine", "Femme", "Vohipeno"), new Medecin("Mamiratra", "Vincentine", "Physiologue"), LocalDate.now()),
-            new Visite(new Patient("Max", "Ricardo", "Homme", "Vohipeno"),new Medecin("Max", "Ricardo", "Pediatrologue"), LocalDate.now())
-    );
+    private ObservableList<Visite> visiteList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {

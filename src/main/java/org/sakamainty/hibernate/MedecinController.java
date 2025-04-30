@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import org.sakamainty.hibernate.models.Medecin;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -24,10 +25,11 @@ public class MedecinController {
 
 
     private ObservableList<Medecin> medecinList = FXCollections.observableArrayList(
-            new Medecin("Charlot", "Vincent", "Cardiologue"),
-            new Medecin("Mamiratra", "Vincentine", "Physiologue"),
-            new Medecin("Max", "Ricardo", "Pediatrologue")
+            FetchMedecins.getInstance().getAllMedecins(0, 20).getEmbedded().getMedecins()
     );
+
+    public MedecinController() throws Exception {
+    }
 
     @FXML public void initialize() {
         listContextMenu = new ContextMenu();
@@ -38,7 +40,16 @@ public class MedecinController {
         deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Medecin supprimer avec succés");
+                Medecin medecin = medecinTable.getSelectionModel().getSelectedItem();
+
+                if (medecin != null) {
+                    try {
+                        FetchMedecins.getInstance().deleteMedecin(medecin);
+                        medecinList.remove(medecin);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
 
@@ -52,7 +63,15 @@ public class MedecinController {
         updateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Update Medecin");
+
+                Medecin medecin = medecinTable.getSelectionModel().getSelectedItem();
+                if (medecin != null) {
+                    try {
+                        showUpdateMedecinDialog(medecin);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
 
@@ -79,7 +98,7 @@ public class MedecinController {
         });
     }
 
-    @FXML public void showNewMedecinDialog() {
+    @FXML public void showNewMedecinDialog() throws Exception {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(medecinContent.getScene().getWindow());
         dialog.setTitle("Ajouter un nouvel medecin");
@@ -99,7 +118,45 @@ public class MedecinController {
         Optional<ButtonType> result = dialog.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("Okay button pressed");
+            NewMedecinController newMedecinController = fxmlLoader.getController();
+            Medecin newMedecin = newMedecinController.submitFormHandler();
+
+            Medecin enregistredMedecin = FetchMedecins.getInstance().createMedecin(newMedecin);
+
+            this.medecinList.add(enregistredMedecin);
+        }
+    }
+
+    @FXML private void showUpdateMedecinDialog(Medecin medecin) throws Exception {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(medecinContent.getScene().getWindow());
+        dialog.setTitle("Mettre à jour medecin");
+        dialog.setHeaderText("Update Medecin");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("new-medecin.fxml"));
+        NewMedecinController newMedecinController;
+
+        try {
+            DialogPane dialogPane = fxmlLoader.load();
+            newMedecinController = fxmlLoader.getController();
+            newMedecinController.setFormHandler(medecin);
+            dialog.setDialogPane(dialogPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Medecin updateMedecin = newMedecinController.submitUpdateFormHandler(medecin);
+
+            FetchMedecins.getInstance().updateMedecin(updateMedecin);
+
+            medecinList.remove(medecin);
+            medecinList.add(updateMedecin);
         }
     }
 }

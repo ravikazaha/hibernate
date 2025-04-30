@@ -1,5 +1,7 @@
 package org.sakamainty.hibernate;
 
+import org.sakamainty.hibernate.models.Medecin;
+
 import java.time.LocalDate;
 
 public class Visite {

@@ -20,11 +20,11 @@
         <VBox spacing="10">
             <VBox spacing="4">
                 <Label text="Nom" />
-                <TextField />
+                <TextField fx:id="firstNameField"/>
             </VBox>
             <VBox spacing="4">
                 <Label text="Prenom" />
-                <TextField />
+                <TextField fx:id="lastNameField"/>
             </VBox>
             <VBox spacing="4">
                 <Label text="Grade"/>
