@@ -1,8 +1,8 @@
-package org.sakamainty.hibernate;
+package org.sakamainty.hibernate.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sakamainty.hibernate.models.Medecin;
-import org.sakamainty.hibernate.models.MedecinResponse;
+import org.sakamainty.hibernate.models.medecins.Medecin;
+import org.sakamainty.hibernate.models.medecins.MedecinResponse;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,18 +10,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
-public class FetchMedecins {
-    private static final FetchMedecins INSTANCE = new FetchMedecins();
+public class MedecinService {
+    private static final MedecinService INSTANCE = new MedecinService();
     private final HttpClient client;
     private final ObjectMapper mapper;
     private final String baseUrl = "http://localhost:8080/api/medecins";
 
-    private FetchMedecins() {
+    private MedecinService() {
         this.client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
         this.mapper = new ObjectMapper();
     }
 
-    public static FetchMedecins getInstance() {
+    public static MedecinService getInstance() {
         return INSTANCE;
     }
 
@@ -107,6 +107,12 @@ public class FetchMedecins {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() != 204 && response.statusCode() != 200) {
             throw new RuntimeException("Failed to delete medecin " + ": HTTP " + response.statusCode());
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        for (Medecin medecin : MedecinService.getInstance().getAllMedecins(0, 10).getEmbedded().getMedecins()) {
+            System.out.println(medecin.getNom());
         }
     }
 }

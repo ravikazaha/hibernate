@@ -1,6 +1,7 @@
 package org.sakamainty.hibernate;
 
-import org.sakamainty.hibernate.models.Medecin;
+import org.sakamainty.hibernate.models.medecins.Medecin;
+import org.sakamainty.hibernate.models.patients.Patient;
 
 import java.time.LocalDate;
 

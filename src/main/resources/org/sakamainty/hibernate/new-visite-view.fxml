@@ -9,7 +9,7 @@
 <?import javafx.collections.FXCollections?>
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.sakamainty.hibernate.NewVisiteController"
+            fx:controller="org.sakamainty.hibernate.controllers.visites.NewVisiteController"
             prefHeight="200.0" prefWidth="400.0">
 
     <headerText>
@@ -36,7 +36,7 @@
             </VBox>
             <VBox spacing="4">
                 <Label text="Date"/>
-                <DatePicker fx:id="date" prefWidth="200" />
+                <DatePicker  fx:id="dateField" prefWidth="200" />
             </VBox>
         </VBox>
     </content>

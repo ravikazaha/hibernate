@@ -1,4 +1,4 @@
-package org.sakamainty.hibernate;
+package org.sakamainty.hibernate.controllers.medecins;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import org.sakamainty.hibernate.models.Medecin;
+import org.sakamainty.hibernate.models.medecins.Medecin;
+import org.sakamainty.hibernate.services.MedecinService;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class MedecinController {
 
 
     private ObservableList<Medecin> medecinList = FXCollections.observableArrayList(
-            FetchMedecins.getInstance().getAllMedecins(0, 20).getEmbedded().getMedecins()
+            MedecinService.getInstance().getAllMedecins(0, 15).getEmbedded().getMedecins()
     );
 
     public MedecinController() throws Exception {
@@ -44,7 +45,7 @@ public class MedecinController {
 
                 if (medecin != null) {
                     try {
-                        FetchMedecins.getInstance().deleteMedecin(medecin);
+                        MedecinService.getInstance().deleteMedecin(medecin);
                         medecinList.remove(medecin);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -93,7 +94,6 @@ public class MedecinController {
                     row.setContextMenu(null);
                 }
             });
-
             return row;
         });
     }
@@ -102,7 +102,7 @@ public class MedecinController {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(medecinContent.getScene().getWindow());
         dialog.setTitle("Ajouter un nouvel medecin");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("new-medecin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/sakamainty/hibernate/new-medecin.fxml"));
 
         try {
             DialogPane dialogPane = fxmlLoader.load();
@@ -121,7 +121,7 @@ public class MedecinController {
             NewMedecinController newMedecinController = fxmlLoader.getController();
             Medecin newMedecin = newMedecinController.submitFormHandler();
 
-            Medecin enregistredMedecin = FetchMedecins.getInstance().createMedecin(newMedecin);
+            Medecin enregistredMedecin = MedecinService.getInstance().createMedecin(newMedecin);
 
             this.medecinList.add(enregistredMedecin);
         }
@@ -132,7 +132,7 @@ public class MedecinController {
         dialog.initOwner(medecinContent.getScene().getWindow());
         dialog.setTitle("Mettre à jour medecin");
         dialog.setHeaderText("Update Medecin");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("new-medecin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/sakamainty/hibernate/new-medecin.fxml"));
         NewMedecinController newMedecinController;
 
         try {
@@ -153,10 +153,13 @@ public class MedecinController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Medecin updateMedecin = newMedecinController.submitUpdateFormHandler(medecin);
 
-            FetchMedecins.getInstance().updateMedecin(updateMedecin);
+            Medecin updatedMedecin = MedecinService.getInstance().updateMedecin(updateMedecin);
 
-            medecinList.remove(medecin);
-            medecinList.add(updateMedecin);
+            int index = medecinList.indexOf(updateMedecin);
+
+            if (index != -1) {
+                medecinList.set(index, updatedMedecin);
+            }
         }
     }
 }

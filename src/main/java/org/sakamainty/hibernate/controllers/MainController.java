@@ -1,20 +1,15 @@
-package org.sakamainty.hibernate;
+package org.sakamainty.hibernate.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-import java.util.Objects;
 
-public class HomeController {
+public class MainController {
     @FXML
     private AnchorPane mainContent;
 
@@ -74,7 +69,7 @@ public class HomeController {
 
     private void showMedecin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("medecin-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/sakamainty/hibernate/medecin-view.fxml"));
             Parent medecinView = loader.load();
             mainContent.getChildren().setAll(medecinView);
         } catch (IOException e) {
@@ -84,7 +79,7 @@ public class HomeController {
 
     private void showPatient() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/sakamainty/hibernate/patient-view.fxml"));
             Parent patientView = loader.load();
             mainContent.getChildren().setAll(patientView);
         } catch (IOException e) {
@@ -94,7 +89,7 @@ public class HomeController {
 
     private void showVisite() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("visite-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/sakamainty/hibernate/visite-view.fxml"));
             Parent visiteView = loader.load();
             mainContent.getChildren().setAll(visiteView);
         } catch (IOException e) {

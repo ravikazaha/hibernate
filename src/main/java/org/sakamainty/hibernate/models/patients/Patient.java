@@ -1,18 +1,16 @@
-package org.sakamainty.hibernate;
+package org.sakamainty.hibernate.models.patients;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.sakamainty.hibernate.models.Link;
+
+import java.util.Map;
 
 public class Patient {
     private String nom;
     private String prenom;
     private String sexe;
     private String adresse;
-    private String codepat;
-
-    public Patient(String nom, String prenom, String sexe, String adresse) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sexe = sexe;
-        this.adresse = adresse;
-    }
+    @JsonProperty("_links") private Map<String, Link> links;
 
     public String getNom() {
         return nom;
@@ -46,11 +44,11 @@ public class Patient {
         this.adresse = adresse;
     }
 
-    public String getCodepat() {
-        return codepat;
+    public Map<String, Link> getLinks() {
+        return links;
     }
 
-    public void setCodepat(String codepat) {
-        this.codepat = codepat;
+    public void setLinks(Map<String, Link> links) {
+        this.links = links;
     }
 }

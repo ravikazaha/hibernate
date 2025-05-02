@@ -1,9 +1,9 @@
-package org.sakamainty.hibernate;
+package org.sakamainty.hibernate.controllers.medecins;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import org.sakamainty.hibernate.models.Medecin;
+import org.sakamainty.hibernate.models.medecins.Medecin;
 
 public class NewMedecinController {
     @FXML private ChoiceBox<String> gradeChoiceBox;

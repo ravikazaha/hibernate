@@ -1,6 +1,7 @@
-package org.sakamainty.hibernate.models;
+package org.sakamainty.hibernate.models.medecins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.sakamainty.hibernate.models.Link;
 
 import java.util.Map;
 

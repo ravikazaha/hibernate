@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.collections.FXCollections?>
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.sakamainty.hibernate.NewPatientController"
+            fx:controller="org.sakamainty.hibernate.controllers.patients.NewPatientController"
             prefHeight="200.0" prefWidth="400.0">
 
     <headerText>
@@ -20,11 +15,11 @@
         <VBox spacing="10">
             <VBox spacing="4">
                 <Label text="Nom" />
-                <TextField />
+                <TextField fx:id="firstNameField"/>
             </VBox>
             <VBox spacing="4">
                 <Label text="Prenom" />
-                <TextField />
+                <TextField fx:id="lastNameField"/>
             </VBox>
             <VBox spacing="4">
                 <Label text="Sexe"/>
@@ -32,14 +27,14 @@
                     <fx:define>
                         <ToggleGroup fx:id="sexeToggleGroup" />
                     </fx:define>
-                    <RadioButton text="Homme" toggleGroup="$sexeToggleGroup"/>
-                    <RadioButton text="Femme" toggleGroup="$sexeToggleGroup"/>
+                    <RadioButton fx:id="hommeRadioButton" text="Homme" toggleGroup="$sexeToggleGroup" selected="true"/>
+                    <RadioButton fx:id="femmeRadioButton" text="Femme" toggleGroup="$sexeToggleGroup"/>
                 </HBox>
             </VBox>
 
             <VBox spacing="4">
                 <Label text="Adresse" />
-                <TextField />
+                <TextField fx:id="adresseField"/>
             </VBox>
         </VBox>
     </content>

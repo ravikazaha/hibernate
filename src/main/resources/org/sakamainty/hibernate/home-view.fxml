@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.sakamainty.hibernate.HomeController">
+            fx:controller="org.sakamainty.hibernate.controllers.MainController">
     <left>
         <VBox spacing="10"  style="-fx-background-color: #2C3E50; -fx-padding: 10;">
             <Button fx:id="medecinBtn" text="Medecin" onAction="#handleMedecin" prefWidth="150" prefHeight="20"/>

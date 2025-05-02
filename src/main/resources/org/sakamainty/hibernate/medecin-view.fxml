@@ -10,7 +10,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       fx:id="medecinContent"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.sakamainty.hibernate.MedecinController" spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20">
+      fx:controller="org.sakamainty.hibernate.controllers.medecins.MedecinController" spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20">
     <Text text="Medecin" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
 
     <HBox alignment="CENTER">

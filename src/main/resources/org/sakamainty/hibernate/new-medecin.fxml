@@ -9,7 +9,7 @@
 <?import javafx.collections.FXCollections?>
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.sakamainty.hibernate.NewMedecinController"
+            fx:controller="org.sakamainty.hibernate.controllers.medecins.NewMedecinController"
             prefHeight="200.0" prefWidth="400.0">
 
     <headerText>
